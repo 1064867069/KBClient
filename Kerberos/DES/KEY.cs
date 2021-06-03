@@ -49,7 +49,7 @@ namespace DES
 				KBstr = Tool.StrToBin(K, true);
 
 			}
-
+			
 			if (!isPlain)
 			{
 				resMovTble();
