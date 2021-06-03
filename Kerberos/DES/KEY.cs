@@ -39,7 +39,16 @@ namespace DES
 			KnTemp = new int[48];
 			isPlain = i;
 
-			string KBstr = Tool.StrToBin(K, true);
+			string KBstr;
+			if(K.Length==16)
+            {
+				KBstr = Tool.hexStrToBin(K);
+            }
+            else
+            {
+				KBstr = Tool.StrToBin(K, true);
+
+			}
 
 			if (!isPlain)
 			{

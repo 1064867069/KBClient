@@ -14,10 +14,11 @@ namespace Kerberos.Authentication
     class V_Auth
     {
         //与V认证，成功返回共用秘钥
-        static string Auth(string tgs_auth,string myid, string myip, TcpClient client)
+        public static string TS5 = "";
+        public static string Auth(string tgs_auth,string myid, string myip, TcpClient client)
         {
             string[] pauth = tgs_auth.Split("%".ToCharArray()), key = pauth[0].Split(",".ToCharArray());
-            string idv = pauth[1], ts4 = pauth[2];//TGS的id，票据发放时间戳
+            string idv = pauth[1], ts4 = pauth[2], ts5;//TGS的id，票据发放时间戳
             string Ticketv = AuthTool.ModTick(pauth[4]);//票据
             string txt, head, athctor;
             byte[] hbytes;
@@ -103,9 +104,10 @@ namespace Kerberos.Authentication
                 }
                 recvstr = Encoding.ASCII.GetString(recv, 0, len);
                 pauth = krsa.RSADe(recvstr).Split("%".ToCharArray());
-                if (!Auth_V(ts4, pauth[1]))//认证AS失败
+                if (!Auth_V(TS5, pauth[1]))//认证AS失败
                 {
                     Console.WriteLine("V发来的时间不对！");
+                    Console.WriteLine("TS5 = " + pauth[1]);
                     continue;
                 }
                 break;

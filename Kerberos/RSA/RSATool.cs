@@ -68,19 +68,29 @@ namespace RSA
             Stack<int> results = new Stack<int>();
             Stack<char> tempstk = new Stack<char>();
 
+
             while (cur > 0)
             {
-                for (i = 0; i < nlen; i++)
+                try
                 {
-                    cur--;
-                    tempstk.Push(hexarr[cur]);
-                    //temp.Insert(0, hexarr[cur]);
+                    for (i = 0; i < nlen; i++)
+                    {
+                        cur--;
+                        tempstk.Push(hexarr[cur]);
+                        //temp.Insert(0, hexarr[cur]);
+                    }
+                    while (tempstk.Count > 0)
+                        temp.Append(tempstk.Pop());
+                    results.Push(Convert.ToInt32(temp.ToString(), 16));
+                    //Console.WriteLine(Convert.ToInt32(temp.ToString(), 16));
+                    temp.Clear();
                 }
-                while (tempstk.Count > 0)
-                    temp.Append(tempstk.Pop());
-                results.Push(Convert.ToInt32(temp.ToString(), 16));
-                //Console.WriteLine(Convert.ToInt32(temp.ToString(), 16));
-                temp.Clear();
+                catch(FormatException e)
+                {
+                    Console.WriteLine("十六进制字符串转数字时出现格式异常！");
+                    Console.WriteLine("temp = " + temp);
+                    continue;
+                }
             }
             return results;
         }

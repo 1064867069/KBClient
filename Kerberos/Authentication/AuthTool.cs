@@ -26,9 +26,9 @@ namespace Kerberos.Authentication
         public const string idtgs = "shenruijie";
         public const string idv = "xiongguozheng";
 
-        public const string asnet = "192.168.43.121";
-        public const string tgsnet = "192.168.43.125";
-        public const string vnet = "192.168.43.66";
+        public const string asnet = "192.168.43.218";
+        public const string tgsnet = "192.168.43.121";
+        public const string vnet = "192.168.43.125";
         static public IPAddress GetInternalIP()
         {
             NetworkInterface[] nics = NetworkInterface.GetAllNetworkInterfaces();
@@ -59,7 +59,8 @@ namespace Kerberos.Authentication
             sb.Append("%");
             sb.Append(myip);
             sb.Append("%");
-            sb.Append(DateTime.Now.ToString());
+            V_Auth.TS5 = DateTime.Now.ToString();
+            sb.Append(V_Auth.TS5);
             result = rsa.RSAEn(sb.ToString());
             return result;
         }

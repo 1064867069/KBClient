@@ -30,6 +30,7 @@ namespace Kerberos.Authentication
             StreamReader sr;
 
             client.Connect(ep);
+            Console.WriteLine("AS连接成功！\n");
             ns = client.GetStream();
             sw = new StreamWriter(ns);
             sr = new StreamReader(ns);

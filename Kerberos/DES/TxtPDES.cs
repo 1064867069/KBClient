@@ -39,7 +39,15 @@ namespace DES
 			LNext = new int[32];
 			RNext = new int[32];
 			DEStxt = new int[64];
-			String TBstr,vbinstr = Tool.StrToBin(vector,true);
+			String TBstr,vbinstr;
+			if(vector.Length==16)
+            {
+				vbinstr = Tool.hexStrToBin(vector);
+            }
+            else
+            {
+				vbinstr = Tool.StrToBin(vector, true);
+			}
 			int[] viarr = Tool.BStrToInt(vbinstr,64);
 			//Console.WriteLine(txt);
 			if (isPlain)

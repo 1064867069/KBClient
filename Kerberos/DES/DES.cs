@@ -22,9 +22,17 @@ namespace DES
 			OriginTxt = txtSet;
 			int Count = OriginTxt.Length;
 			ProcTxt = new String[Count];
-			temp = k.PadRight(16, '0');
-			keystr = temp.Substring(0, 8);
-			vector = temp.Substring(8, 8);
+			if (k.Length <= 16)
+			{
+				temp = k.PadRight(16, '0');
+				keystr = temp.Substring(0, 8);
+				vector = temp.Substring(8, 8);
+			}
+			else
+            {
+				keystr = k.Substring(0, 16);
+				vector = k.Substring(16, 16);
+            }
 			key = new KEY(keystr, IsPlain);
 			ip = new IP();
 			box = new Box();
